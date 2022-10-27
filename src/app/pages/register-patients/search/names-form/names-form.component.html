@@ -1,0 +1,35 @@
+<form [formGroup]="namesForm" class="form" (ngSubmit)="buscarNombres()">
+  <div class='inputs'>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre(s)</mat-label>
+    <input matInput placeholder="Nombre(s)" formControlName="nombre" />
+    <mat-error *ngIf="getErrorMessage('nombre','required')">Este valor es obligatorio</mat-error>
+    <mat-error *ngIf="getErrorMessage('nombre','pattern')">Solo caracteres</mat-error>
+    <!--<mat-hint>Hint</mat-hint>--->
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido Paterno</mat-label>
+    <input matInput placeholder="Apellido Paterno" formControlName="paterno" />
+    <mat-error *ngIf="getErrorMessage('paterno','required')">Este valor es obligatorio</mat-error>
+    <mat-error *ngIf="getErrorMessage('paterno','pattern')">Solo caracteres</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido Materno</mat-label>
+    <input matInput placeholder="Apellido Materno" formControlName="materno" />
+    <mat-error *ngIf="getErrorMessage('materno','pattern')">Solo caracteres</mat-error>
+  </mat-form-field>
+
+</div>
+  <div class="form__buttons">
+  <button mat-raised-button [disabled]="namesForm.invalid" color="primary">
+    <mat-icon matPrefix>search</mat-icon>
+    Buscar
+  </button>
+  <button type="button" mat-raised-button color="warn"  [disabled]="namesForm.invalid" (click)="resetForm()">
+    <mat-icon>delete_sweep</mat-icon>
+    Limpiar
+  </button>
+</div >
+</form>

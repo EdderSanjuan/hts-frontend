@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .inputs{
+    display: flex;
+
+    .mat-form-field {
+      margin-right: 10px; 
+    }
+  }
+}
+
+::ng-deep .mat-form-field-wrapper{
+  padding-bottom: 16px;
+}
+
+button{
+  margin: 0 10px;
+}
+
+

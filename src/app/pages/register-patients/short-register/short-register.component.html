@@ -1,0 +1,215 @@
+<div class="container">
+  <form [formGroup]="shortForm" (ngSubmit)="registerShortPatient()">
+    <div class="row mt">
+      <div class="row__input">
+        <div class="label">Nombre</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Nombre"
+            autocomplete="off"
+            formControlName="name"
+          />
+           <mat-error *ngIf="getErrorMessage('name','required')">Este valor es obligatorio</mat-error>
+           <mat-error *ngIf="getErrorMessage('name','minlength')">Mínimo 2 caracteres</mat-error>
+           <mat-error *ngIf="getErrorMessage('name','maxlength')">Máximo 50 caracteres</mat-error>
+           <mat-error *ngIf="getErrorMessage('name','pattern')">Solo caracteres</mat-error>
+         
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Primer apellido</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Apellido"
+            autocomplete="off"
+            formControlName="pLastName"
+          />
+          <mat-error *ngIf="getErrorMessage('pLastName','required')">Este valor es obligatorio</mat-error>
+          <mat-error *ngIf="getErrorMessage('pLastName','minlength')">Mínimo 2 caracteres</mat-error>
+          <mat-error *ngIf="getErrorMessage('pLastName','maxlength')">Máximo 50 caracteres</mat-error>
+          <mat-error *ngIf="getErrorMessage('pLastName','pattern')">Solo caracteres</mat-error>
+          
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Segundo apellido</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Apellido"
+            autocomplete="off"
+            formControlName="mLastName"
+          />
+        
+          <mat-error *ngIf="getErrorMessage('mLastName','pattern')">Solo caracteres</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Sexo</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="sex">
+            <mat-option
+              value="{{ i.sexoId }}"
+              *ngFor="let i of sexOptions?.informacion?.cSexo"
+              >{{ i.sexo }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('sex','required')">Este valor es obligatorio</mat-error>
+         
+        </mat-form-field>
+      </div>
+      <!--end firstRow-->
+    </div>
+
+    <div class="row">
+      <div class="row__input">
+        <div class="label">Fecha de nacimiento</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            formControlName="bornDate"
+          />
+        
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+          <mat-error *ngIf="getErrorMessage('bornDate','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      
+    </div>
+
+    <div class="row">
+      <div class="row__input">
+        <div class="label">Nacionalidad</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="nationality">
+            <mat-option
+              value="{{ i.paisId }}"
+              *ngFor="let i of nationalityOptions"
+              >{{ i.descripcion }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('nationality','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Entidad de nacimiento</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="entityBorn">
+            <mat-option
+              value="{{ ik.cve }}"
+              *ngFor="let ik of entityOptions"
+              >{{ ik.descripcion }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('entityBorn','required')">Este valor es obligatorio</mat-error>
+          
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Municipio de nacimiento</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="muniBorn">
+            <mat-option
+              value="{{ i.id }}"
+              *ngFor="let i of muniOptions"
+              >{{ i.descripcion }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('muniBorn','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row__input">
+        <div class="label">CURP</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Curp"
+            autocomplete="off"
+            formControlName="curp"
+            maxlength="18"
+          />
+          <mat-error *ngIf="getErrorMessage('curp','required')">Este valor es obligatorio</mat-error>
+          <mat-error *ngIf="shortForm.get('curp')?.errors?.invalidCurp">Este CURP ya existe</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Teléfono casa</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="5555555555"
+            autocomplete="off"
+            formControlName="homeNumber"
+            maxlength="10"
+          />
+          <mat-error *ngIf="getErrorMessage('homeNumber','required')">Este valor es obligatorio</mat-error>
+          <mat-error *ngIf="getErrorMessage('homeNumber','pattern')">Solo números</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Teléfono celular</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="5555555555"
+            autocomplete="off"
+            formControlName="mobileNumber"
+            maxlength="10"
+          />
+          <mat-error *ngIf="getErrorMessage('mobileNumber','required')">Este valor es obligatorio</mat-error>
+          <mat-error *ngIf="getErrorMessage('mobileNumber','minlength')">Deben ser mínimo 10 numeros</mat-error>
+          <mat-error *ngIf="getErrorMessage('mobileNumber','pattern')">Solo numeros</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Correo electrónico</div>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="correo@mail.com"
+            autocomplete="off"
+            formControlName="email"
+          />
+          <mat-error *ngIf="getErrorMessage('email','email')">email no valido</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="actions mt">
+      <button mat-raised-button color="warn" type="button" (click)="cancel()"><mat-icon class='icon-button'>close</mat-icon>Cancelar</button>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="shortForm.invalid"
+      >
+      <mat-icon class='icon-button'>save</mat-icon>
+        Guardar datos
+      </button>
+    </div>
+  </form>
+</div>
+
+

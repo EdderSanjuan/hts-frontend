@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <img class="logo" src="../../../assets/images/logo/logo-hts.png" />
+  <span class="spacer"></span>
+  <span>Name hospital</span>
+</mat-toolbar>
+<mat-drawer-container class="container" autosize>
+  <mat-drawer class="sidenav" mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item>
+        <a  routerLink="./patients" >
+          <mat-icon mat-list-icon matTooltip="Pacientes"
+            >account_circle</mat-icon
+          ></a
+        >
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="Lorem">build</mat-icon>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="Lorem">library_books</mat-icon>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="Lorem">settings</mat-icon>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="Lorem">apartment</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item  *ngIf="userExists">
+        <mat-icon mat-list-icon matTooltip="cerrar sesion" (click)="logout()">logout</mat-icon>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

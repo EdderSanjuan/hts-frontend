@@ -1,0 +1,25 @@
+*{
+    font-size: 12px;
+}
+
+.container{
+    margin: 1.5rem;
+}
+
+.row{
+    display: flex;
+    gap: 1rem;
+    &__input{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;        
+    }
+}
+
+.center{
+    justify-content: center;
+}
+
+.actions{
+    margin-top: 1rem;
+}

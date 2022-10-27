@@ -1,0 +1,42 @@
+<section class="background">
+  <div class="login__container">
+    <div>
+      <img class="logo" src="../../../assets/images/logo/logo-hts.png" />
+      <h1>Iniciar sesión</h1>
+      <form [formGroup]="loginForm" class="login__form">
+        <div class="field">
+          <mat-icon matSuffix>mail_outline</mat-icon>
+          <mat-form-field appearance="legacy">
+            <mat-label>Correo eléctronico</mat-label>
+            <input matInput autocomplete="off" formControlName="username" />
+          </mat-form-field>
+        </div>
+        <div class="field">
+          <mat-icon matSuffix>lock_outline</mat-icon>
+          <mat-form-field appearance="legacy">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              autocomplete="off"
+              formControlName="password"
+              type="password"
+            />
+          </mat-form-field>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onLogin()"
+          [disabled]="loginForm.invalid"
+        >
+          Ingresar
+        </button>
+      </form>
+
+      <p class="underline">Olvide mi contraseña</p>
+      <p class="blue">¿No tiene una cuenta? <span>Registrate aquí</span></p>
+    </div>
+
+    <p class="underline">Terminos de uso. Políticas de privacidad</p>
+  </div>
+</section>

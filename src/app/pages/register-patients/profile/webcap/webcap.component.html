@@ -1,0 +1,18 @@
+<div mat-dialog-title class="text-center">Tomar nueva foto</div>
+
+<div mat-dialog-content>
+    <webcam
+    [height]="500"
+    [width]="500"
+    [trigger]="imageTrigger"
+    [imageQuality]="1"
+    (imageCapture)="captureImage($event)"
+    (initError)="handleInitError($event)"
+    ></webcam> 
+   
+</div>
+
+<div mat-dialog-actions class="actions">
+    <button mat-button color="primary"  (click)="triggerSnapshot()">capturar</button>
+    <button mat-button color="warn" mat-dialog-close>cancelar</button>
+</div>

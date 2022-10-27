@@ -1,0 +1,13 @@
+.container {
+  margin: 1rem 0 1rem;
+
+  &__actions{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 1rem;
+    
+    
+  }
+}
+

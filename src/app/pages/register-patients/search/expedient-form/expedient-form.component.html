@@ -1,0 +1,19 @@
+<form [formGroup]="expForm" (ngSubmit)="buscarExpediente()">
+  <div class="form">
+    <mat-form-field appearance="outline">
+      <mat-label>No. Expediente</mat-label>
+      <input matInput placeholder="No. Expediente" formControlName="exp" />
+    </mat-form-field>
+
+    <div class="form__buttons">
+      <button mat-raised-button [disabled]="expForm.invalid" color="primary">
+        <mat-icon matPrefix>search</mat-icon>
+        Buscar
+      </button>
+      <button type="button" mat-raised-button color="warn"  [disabled]="expForm.invalid" (click)="resetForm()">
+        <mat-icon>delete_sweep</mat-icon>
+        Limpiar
+      </button>
+    </div>
+  </div>
+</form>

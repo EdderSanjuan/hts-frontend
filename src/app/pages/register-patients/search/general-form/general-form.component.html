@@ -1,0 +1,32 @@
+<div class="forms">
+  <div class="forms__select">
+    <app-select
+      [options]="opciones"
+      [label]="selectLabel"
+      (value)="elegirFormulario($event)"
+    ></app-select>
+  </div>
+
+  <div class="forms__inputs">
+    <app-names-form
+      *ngIf="showNameForm"
+      (searchValue)="getData($event)"
+      (resetNames)="reset($event)"
+    ></app-names-form>
+    <app-expedient-form
+      *ngIf="showExpForm"
+      (expValue)="getExpData($event)"
+      (resetExp)="reset($event)"
+    ></app-expedient-form>
+    <app-curp-form
+      *ngIf="showCurpForm"
+      (curpValue)="getCurpData($event)"
+      (resetCurp)="reset($event)"
+    ></app-curp-form>
+  </div>
+</div>
+
+<div class="result">
+  <app-result-table [datos]="pacientes" *ngIf="showTable"></app-result-table>
+</div>
+

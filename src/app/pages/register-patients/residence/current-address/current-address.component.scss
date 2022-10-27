@@ -1,0 +1,53 @@
+* {
+  font-size: 12px;
+}
+
+
+.padding{
+  padding: 2rem;
+}
+
+.mt {
+  padding: 2rem;
+}
+
+.title {
+ 
+  background-color: var(--secondary);
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+
+  &__text{
+    font-size: 1.2rem;
+    font-weight: 500;
+    
+  }
+
+  &__icon{
+    font-size: 1.3rem;
+  }
+
+}
+
+
+
+.container {
+  max-width: 120rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}

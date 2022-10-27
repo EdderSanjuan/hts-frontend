@@ -1,0 +1,24 @@
+table {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.actions__container {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-icon {
+  font-size: 30px;
+}
+
+.error {
+  margin-top: 2rem;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.new-patient, .edit-icon {
+  color: #0c5265;
+}

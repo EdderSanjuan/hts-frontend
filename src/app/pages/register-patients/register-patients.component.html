@@ -1,0 +1,32 @@
+<section class="patients">
+  <app-search></app-search>
+  
+  
+  
+  <mat-card *ngIf="registerType !== 0" >
+    
+    <mat-tab-group mat-align-tabs="center" [selectedIndex]="step">
+      <mat-tab label="Datos Generales">
+        <div class="container" *ngIf="!updateOption">
+          <app-short-register *ngIf="registerType === 1" (flagCancel)="cancel($event)"></app-short-register>
+          <app-long-register *ngIf="registerType === 2"  (flagCancel)="cancel($event)"></app-long-register>
+        </div>
+        <div class="container" *ngIf="updateOption"> 
+          <app-long-register *ngIf="registerType === 2" [updateFlag]="updateOption"  [qrPatient]="qr" (flagCancel)="cancel($event)"></app-long-register>
+        </div>
+      
+    </mat-tab>
+
+      <mat-tab label="Domicilios" *ngIf="registerType === 2">
+        <div class="container">
+          <app-residence></app-residence> 
+        </div>
+        </mat-tab>
+     
+    </mat-tab-group>
+    
+    
+  </mat-card>
+
+
+</section>

@@ -1,0 +1,463 @@
+<form [formGroup]="longForm" (ngSubmit)="registerPatient()">
+
+  <div class="firstPart">
+    <div class="row center">
+      <div class="row__input">
+        <app-profile *ngIf="!updateFlag" (finalImage)="getImageProfile($event)"></app-profile>
+        <app-profile  [initImage]="profileImage" (finalImage)="getImageProfile($event)" *ngIf="updateFlag"></app-profile>
+      </div>
+      <div class="row__input">
+        <div class="label">Número de paciente único</div>
+        <mat-form-field appearance="outline">
+          <mat-icon matPrefix>account_circle</mat-icon>
+          <input *ngIf="updateFlag"
+          type="text"
+          matInput
+          readonly
+          placeholder="asignado automaticamente"
+          autocomplete="off"
+          formControlName="patNumber"
+        />
+
+          <input *ngIf="!updateFlag"
+            type="text"
+            matInput
+            disabled
+            placeholder="asignado automaticamente"
+            autocomplete="off"
+          />
+        </mat-form-field>
+
+       
+      </div>
+      <div class="row__input">
+        <div class="label">Número de expediente</div>
+        <mat-form-field appearance="outline">
+          <mat-icon matPrefix>assignment</mat-icon>
+         
+          <input *ngIf="!updateFlag"
+            type="text"
+            matInput
+            disabled
+            placeholder="asignado automaticamente"
+            autocomplete="off"
+          
+          />
+
+          <input *ngIf="updateFlag"
+            type="text"
+            matInput
+            readonly
+            placeholder="asignado automaticamente"
+            autocomplete="off"
+            formControlName="patExpedient"
+          
+          />
+        </mat-form-field>
+      </div>
+      <div class="row__input">
+        <div class="label">Tipo de expediente</div>
+        <mat-form-field appearance="outline">
+          <mat-icon matPrefix>assignment</mat-icon>
+         
+          <input *ngIf="!updateFlag"
+            type="text"
+            matInput
+            disabled
+            placeholder="asignado automaticamente"
+            autocomplete="off"
+            
+          />
+          <input *ngIf="updateFlag"
+            type="text"
+            matInput
+            readonly
+            placeholder="asignado automaticamente"
+            autocomplete="off"
+            formControlName="patExpedientType"
+            
+          />
+        </mat-form-field>
+      </div>
+      <div class="row__input" *ngIf="updateFlag">
+        <div class="label">Obtener QR</div>
+        <button mat-icon-button type="button" class='button-qr' (click)="openDialog()">
+          <mat-icon class='icon-display'>qr_code_2</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row__input">
+        <div class="label">Nombre</div>
+        <mat-form-field appearance="outline">
+          <input
+            type="text"
+            matInput
+            placeholder="nombre"
+            autocomplete="off"
+            formControlName="name"
+          />
+          <mat-error *ngIf="getErrorMessage('name','required')">Este valor es obligatorio</mat-error>
+          <mat-error *ngIf="getErrorMessage('name','minlength')">Mínimo 2 caracteres</mat-error>
+          <mat-error *ngIf="getErrorMessage('name','maxlength')">Máximo 50 caracteres</mat-error>
+          <mat-error *ngIf="getErrorMessage('name','pattern')">Solo caracteres</mat-error>
+        </mat-form-field>
+        
+      </div>
+
+      <div class="row__input">
+        <div class="label">Primer apellido</div>
+        <mat-form-field appearance="outline">
+          <input
+            type="text"
+            matInput
+            placeholder="primer apellido"
+            autocomplete="off"
+            formControlName="pLastName"
+          />
+          <mat-error *ngIf="getErrorMessage('pLastName','required')">Este valor es obligatorio</mat-error>
+           <mat-error *ngIf="getErrorMessage('pLastName','minlength')">Mínimo 2 caracteres</mat-error>
+           <mat-error *ngIf="getErrorMessage('pLastName','maxlength')">Máximo 50 caracteres</mat-error>
+           <mat-error *ngIf="getErrorMessage('pLastName','pattern')">Solo caracteres</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Segundo apellido</div>
+        <mat-form-field appearance="outline">
+          <input
+            type="text"
+            matInput
+            placeholder="segundo apellido"
+            autocomplete="off"
+            formControlName="mLastName"
+          />
+          <mat-error *ngIf="getErrorMessage('mLastName','pattern')">Solo caracteres</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Sexo</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="sex">
+            <mat-option
+              value="{{ i.sexoId }}"
+              *ngFor="let i of sexOptions?.informacion?.cSexo"
+              >{{ i.sexo }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('sex','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row__input">
+        <div class="label">Tipo de beneficiario</div>
+        <mat-form-field appearance="outline" >
+          <mat-select formControlName="beneficiaryType" placeholder="tipo">
+            <mat-option
+            value="{{ i.id }}"
+            *ngFor="let i of beneficiaryOptions"
+            >{{ i.name }}</mat-option
+          >
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('beneficiaryType','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row__input">
+        <div class="label">Teléfono de casa</div>
+        <mat-form-field appearance="outline" >
+          <input type="text" matInput placeholder="casa" maxlength="10" formControlName="homeNumber" autocomplete="off">
+          <mat-error *ngIf="getErrorMessage('homeNumber','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row__input">
+        <div class="label">Teléfono celular</div>
+        <mat-form-field appearance="outline">
+          <input type="text" matInput placeholder="celular" maxlength="10" formControlName="phoneNumber" autocomplete="off">
+          <mat-error *ngIf="getErrorMessage('phoneNumber','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field> 
+      </div>
+      <div class="row__input">
+        <div class="label">Email</div>
+        <mat-form-field appearance="outline">
+          <input type="text" matInput placeholder="email" formControlName="email" autocomplete="off">
+          <mat-error *ngIf="getErrorMessage('email','required')">Este valor es obligatorio</mat-error>
+          <mat-error *ngIf="getErrorMessage('email','email')">Email no válido</mat-error>
+        </mat-form-field>
+      </div>
+          
+    </div>
+
+    <div class="row">
+      <div class="row__input">
+        <div class="label">Fecha de nacimiento</div>
+        <mat-form-field appearance="outline" color="primary">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            formControlName="bornDate"
+            (dateChange)="addEvent($event)"
+            readonly
+          />
+
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker ngModelOptions="{timezone:'UTC/GMT'}"></mat-datepicker>
+          <mat-error *ngIf="getErrorMessage('bornDate','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      
+        <div class="row__input" *ngIf="showAge">
+          <div class="label">Edad</div>
+          <mat-form-field appearance="outline" style="width: 40px">
+            <input type="text" style="color:black;" [value]="calculatedAge" matInput readonly disabled />
+          </mat-form-field>
+        </div>
+  
+        <div class="row__input horizontal" *ngIf="showAge">
+          <small class="gray-container">{{age}}</small>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="row__input" *ngIf="!disabledCurp">
+        <div class="label">CURP</div>
+        <mat-form-field appearance="outline" *ngIf="!updateFlag">
+          <input
+            type="text"
+            matInput
+            autocomplete="off"
+            formControlName="curp"
+            [readonly]="read"
+          />
+         
+          <mat-error *ngIf="longForm.get('curp')?.errors?.invalidCurp">Este CURP ya existe</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="updateFlag">
+          <input
+            type="text"
+            matInput
+            placeholder="curp"
+            autocomplete="off"
+            formControlName="updateCurp"
+         
+          />
+        
+     
+        </mat-form-field>
+        
+      </div>
+      <div class="row__input horizontal">
+        <small class="gray-container">Se desconoce CURP</small>
+        <mat-slide-toggle (change)="checkCurp($event)"></mat-slide-toggle>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Nacionalidad</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="nationality">
+            <mat-option
+              value="{{ i.paisId }}"
+              *ngFor="let i of nationalityOp"
+              >{{ i.descripcion }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('nationality','required')">Este valor es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="horizontal">
+        <small class="gray-container">Migrante</small>
+        <mat-slide-toggle (change)="checkMigrante($event)"></mat-slide-toggle>
+      </div>
+    </div>
+  
+    
+    <!--end firstPart-->
+  </div>
+
+  <div class="secondPart">
+    <div class="row">
+      <div class="row__input">
+        <div class="label">Entidad de nacimiento</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="entityBorn" (selectionChange)="entityChange($event)">
+            <mat-option
+              value="{{ik.cve}}"
+              *ngFor="let ik of entityOptions"
+              >{{ ik.descripcion }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="getErrorMessage('entityBorn','required')">Este valor es obligatorio</mat-error>
+          
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Municipio de nacimiento</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="muniBorn">
+            <mat-option
+              value="{{ i.id }}"
+              *ngFor="let i of muniOptions"
+              >{{ i.descripcion }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      
+
+      <div class="row__input">
+        <div class="label">Religión</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="religion">
+            <mat-option
+              value="{{op.religionid}}"
+              *ngFor="let op of religionOptions?.informacion?.cReligion"
+              >{{ op.descripcion }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Estado cívil</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="civilState">
+            <mat-option
+              value="{{ op.estadoCivilId }}"
+              *ngFor="let op of civilOptions?.informacion?.cEstadoCivil"
+              >{{ op.nombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-----second row-->
+
+    <div class="row">
+      
+
+      <div class="row__input">
+        <div class="label">Ocupación</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="ocupation">
+            <mat-option
+              value="{{op.ocupacionId}}"
+              *ngFor="let op of ocupationOptions?.informacion?.cOcupacion"
+              >{{ op.nombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Escolaridad</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="escolarity">
+            <mat-option
+              value="{{op.escolaridadId  }}"
+              *ngFor="let op of escolarityOptions?.informacion?.cEscolaridad"
+              >{{op.escolaridadId  }} {{ op.nombre }} </mat-option
+              
+            >
+            
+          </mat-select>
+          
+        </mat-form-field>
+      </div>
+      
+
+
+      <div class="row__input">
+        <div class="label">¿Trabaja actualmente?</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="workQ">
+            <mat-option
+              value="{{ op.sinoId }}"
+              *ngFor="let op of YesNotOptions?.informacion?.cSiNo"
+              >{{ op.nombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">¿Se considera indígena?</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="indig">
+            <mat-option
+              value="{{ op.sinoId }}"
+              *ngFor="let op of YesNotOptions?.informacion?.cSiNo"
+              >{{ op.nombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!--end second row-->
+
+    <!--third row-->
+    <div class="row">
+      
+      <div class="row__input">
+        <div class="label">¿Habla alguna lengua indígena?</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="indigLanguage">
+            <mat-option
+              value="{{ op.sinoId }}"
+              *ngFor="let op of YesNotOptions?.informacion?.cSiNo"
+              >{{ op.nombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">Tipo de lengua indígena</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="typeLanguage">
+            <mat-option value="{{op.tipoLenguaIndigenaId}}" *ngFor="let op of indigLanguageOptions?.informacion?.cLenguaIndigena">{{op.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row__input">
+        <div class="label">¿Habla español?</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="speakEs">
+            <mat-option
+              value="{{ op.sinoId }}"
+              *ngFor="let op of YesNotOptions?.informacion?.cSiNo"
+              >{{ op.nombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!---end thirdRow--->
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button color="accent" type="button" (click)="cancel()" ><mat-icon class='icon-button'>close_fullscreen</mat-icon> Cerrar</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancel()">
+      <mat-icon class='icon-button'>close</mat-icon>
+      Cancelar</button>
+    <button mat-raised-button color="primary" type="submit">
+      <mat-icon class='icon-button'>save</mat-icon>
+      Guardar datos
+    </button>
+  </div>
+
+</form>
+

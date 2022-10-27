@@ -1,0 +1,167 @@
+
+<form [formGroup]="addressForm" class="mt">
+  <div class="title">
+  
+      <mat-icon class="title__icon">home</mat-icon>
+      <span  class="title__text">{{title}}</span>
+
+  </div>
+  <div class="row">
+    <div class="row__input">
+      <div class="label">Tipo de vialidad</div>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="viaType">
+          <mat-option value="{{op.vialidadId}}" *ngFor="let op of  vialityOptions?.informacion?.cvialidades">{{op.nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row__input">
+      <div class="label">Nombre de vialidad</div>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          autocomplete="off"
+          formControlName="viaName"
+        />
+        <mat-error *ngIf="getErrorMessage('viaName','required')">Este valor es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row__input">
+      <div class="label">Número exterior</div>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          autocomplete="off"
+          formControlName="extNumber"
+        />
+
+        <mat-error *ngIf="getErrorMessage('extNumber','required')">Este valor es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row__input">
+      <div class="label">Letra ext.</div>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          autocomplete="off"
+          formControlName="extLetter"
+        />
+        <mat-error *ngIf="getErrorMessage('extLetter','maxlength')">Solo un caracter</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!--second row-->
+  <div class="row">
+    <div class="row__input">
+      <div class="label">No. int.</div>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          autocomplete="off"
+          formControlName="intNumber"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="row__input">
+      <div class="label">Letra int</div>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          autocomplete="off"
+          formControlName="intLetter"
+        />
+
+      <mat-error *ngIf="getErrorMessage('intLetter','maxlength')">Solo un caracter</mat-error>
+      </mat-form-field> 
+    </div>
+
+    
+
+    <div class="row__input">
+      <div class="label">Asentamiento</div>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          autocomplete="off"
+          formControlName="townShip"
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="row__input">
+        <div class="label">Tipo de asentamiento</div>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="townShipType">
+            
+            <mat-option value="{{op.tipoAsenId}}" *ngFor="let op of townShipOptions?.informacion?.tasentamientos">{{op.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  <!--end second-->
+
+</div>
+
+<div class="row">
+  <div class="row__input">
+    <div class="label">País</div>
+    <mat-form-field appearance="outline">
+      <mat-select formControlName="country">
+        <mat-option value="{{op.paisId}}" *ngFor="let op of countryOptions">{{op.descripcion}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+  <!--thirdRow-->
+  <div class="row">
+    <div class="row__input">
+      <div class="label">Estado</div>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="state">
+        
+          <mat-option value="{{op.id}}-{{op.cve}}" *ngFor="let op of entityOptions">{{op.descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row__input">
+      <div class="label">Municipio</div>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="municipality">
+          <mat-option value="{{op.id}}-{{op.cveEnt}}-{{op.cveMun}}" *ngFor="let op of muniOptions">{{op.descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row__input">
+      <div class="label">Localidad</div>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="locality">
+          <mat-option value="{{op.catLocalidadId}}-{{op.cveEnt}}-{{op.cveMun}}" *ngFor="let op of localityOptions?.informacion?.localidades">{{op.descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row__input">
+      <div class="label">Código postal</div>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="postalCode">
+          <mat-option value="{{op.catCodigoPostalId}}" *ngFor="let op of postalCodeOptions?.informacion?.cpostales">{{op.descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <!--end thirdrow-->
+
+</form>

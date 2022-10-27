@@ -1,0 +1,15 @@
+<div mat-dialog-title class="text-center">Foto de perfil</div>
+<div mat-dialog-content>
+    <div class="avatar">
+      
+        <img src="../../../../../assets/images/avatar.png" alt="user-image" *ngIf="!data && !imagePreview">
+        <img [src]="data" alt="" width="300" height="300" *ngIf="data && !imagePreview">
+        <img [src]="imagePreview" alt="" width="300" height="300" *ngIf="imagePreview">
+    </div>
+</div>
+
+<div mat-dialog-actions class="actions">
+    <button mat-button color="primary" (click)="openWebcam()">cambiar</button>
+    <button mat-button color="warn" mat-dialog-close (click)="cancelClose()">cancelar</button>
+    <button mat-button color="warn" mat-dialog-close *ngIf="imagePreview" (click)="closeDialog()" color="primary">Ok</button>
+</div>

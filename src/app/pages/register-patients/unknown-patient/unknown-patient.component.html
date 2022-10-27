@@ -1,0 +1,137 @@
+<div class="container">
+    <form [formGroup]="unknownPatientForm" (ngSubmit)="addUnknownPatient()">
+    <div class="row">
+        <div class="row__input">
+            <div class="label">
+                No. Paciente
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="noPatient">
+            </mat-form-field>
+        </div>
+
+        <div class="row__input">
+            <div class="label">
+                No. Expediente
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="noExpedient">
+            </mat-form-field>
+        </div>
+
+        <div class="row__input">
+            <div class="label">
+                Tipo Expediente
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" value="Provicional" matInput  disabled style="font-weight:500;color:black;">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row__input">
+            <div class="label">
+                Nombre
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="row__input">
+            <div class="label">
+                Primer Apellido
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="pLastName">
+            </mat-form-field>
+        </div>
+
+        <div class="row__input">
+            <div class="label">
+                Segundo Apellido
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="mLastName">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row__input">
+            <div class="label">
+                Sexo
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="sex">
+                    <mat-option value="{{ i.sexoId }}" *ngFor="let i of sexOptions?.informacion?.cSexo">{{ i.sexo }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row__input">
+            <div class="label">
+                Peso
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="KG" formControlName="weight">
+            </mat-form-field>
+        </div>
+        <div class="row__input">
+            <div class="label">
+                Talla
+            </div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="CM" formControlName="size">
+            </mat-form-field>
+        </div>
+        
+        <div class="row__input">
+            <div class="label">
+                Procedencia
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="procedency">
+                    <mat-option value="{{op.procedenciaId}}" *ngFor="let op of precedencyOptions?.informacion?.cProcedencia">{{op.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <mat-form-field appearance="outline" style="width:100%;">
+            <mat-label>Notas del Paciente</mat-label>
+            <textarea matInput formControlName="patientNotes"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <div class="row__input">
+            <div class="label">Telefono</div>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="tel">
+            </mat-form-field>
+        </div>
+
+        <div class="row__input">
+            <div class="label">Tipo</div>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="typeTel"></mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="actions">
+            <button mat-button type="button" color="accent">Cambiar Paciente</button>
+            <button mat-button type="button" color="primary">Siguiente</button>
+            <button mat-button type="submit" color="primary">Guardar</button>
+            <button mat-button type="button" color="warn">Cancelar</button>
+        </div>
+        
+    </div>
+
+</form>
+
+</div> 

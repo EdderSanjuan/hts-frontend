@@ -1,0 +1,67 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$my-primary-color: (
+  200: #1f819b,
+  500: #1f819b,
+  700: #1f819b,
+  contrast: (
+    200: #000000,
+    500: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+$my-accent-color: (
+  200: #9ba3a7,
+  500: #37474f,
+  700: #2a373f,
+  contrast: (
+    200: #000000,
+    500: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+$my-warn-color: (
+  200: #ff3333,
+  500: #db0202,
+  700: #c40202,
+  contrast: (
+    200: #000000,
+    500: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+$hts-frontend-primary: mat-palette($my-primary-color);
+$hts-frontend-accent: mat-palette($my-accent-color);
+$hts-frontend-warn: mat-palette($my-warn-color);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$hts-frontend-theme: mat-light-theme(
+  (
+    color: (
+      primary: $hts-frontend-primary,
+      accent: $hts-frontend-accent,
+      warn: $hts-frontend-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($hts-frontend-theme);

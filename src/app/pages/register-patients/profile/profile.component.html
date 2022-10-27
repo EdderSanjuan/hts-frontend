@@ -1,0 +1,8 @@
+<div class="avatar">
+    <img src="../../../../../assets/images/avatar.png"  alt="image" *ngIf=" !newImage && !initImage">
+    <img [src]="initImage" alt="image" srcset="" *ngIf="initImage && !newImage"> 
+    <img [src]="newImage" alt="image" *ngIf="newImage">
+    <button mat-icon-button type="button" (click)="openDialog()">
+        <mat-icon >camera_enhance</mat-icon>
+    </button>
+</div>

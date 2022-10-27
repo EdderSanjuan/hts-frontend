@@ -1,0 +1,40 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logo {
+  height: 50px;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.sidenav-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  height: 100%;
+}
+
+.mat-drawer {
+  background: var(--secondary);
+
+  .mat-icon {
+    color: var(--white);
+  }
+}
+.mat-drawer-side {
+  border-right: none;
+}
+
+.mat-list-base {
+  padding: 0;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  padding: 40px 16px;
+}

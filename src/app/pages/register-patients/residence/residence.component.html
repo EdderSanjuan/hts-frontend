@@ -1,0 +1,12 @@
+<div class="container">
+  <app-current-address #actual [title]="'Domicilio actual'"></app-current-address>
+  <app-current-address #alternativo [title]="'Domicilio Alternativo'"></app-current-address>
+
+  <div class="container__actions">
+    <button mat-raised-button type="button" color="warn"> <mat-icon class='icon-button'>close</mat-icon>Cancelar</button>
+    <button mat-raised-button type="button" color="accent" (click)="addAdresses()" [disabled]="actual.isInvalid()"><mat-icon class='icon-button'>save</mat-icon>Guardar</button>
+  </div>
+
+</div>
+
+
